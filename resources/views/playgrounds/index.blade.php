@@ -96,8 +96,17 @@
                 @foreach ($data as $item)
                     <tr>
                         <td scope="row"><a href="/playgrounds/{{$item->id}}">{{ $item->name }}</a></td>
+                        {{-- tulostetaan leikkikenttien arvosanat keltaisina tähtinä --}}
                         <td>
-                            <td>{{ $item->averageRating }}</td>
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($item->averageRating >= $i)
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                @elseif ($item->averageRating > ($i - 0.51))
+                                    <i class="bi bi-star-half text-warning"></i>
+                                @else
+                                    <i class="bi bi-star text-warning"></i>
+                                @endif
+                            @endfor
                         </td>
                     </tr>
                 @endforeach
