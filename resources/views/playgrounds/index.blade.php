@@ -81,7 +81,7 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex">
-                <h3>Leikkikentät_</h3>              
+                <h3>Leikkikentät</h3>              
             </div>
             <table class="table">
                 <thead>
