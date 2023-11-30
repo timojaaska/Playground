@@ -75,6 +75,7 @@
 </div>
 @endauth
 {{-- admin näkymä loppuu --}}
+
 {{-- VIERAS NÄKYMÄ ALKAA --}}
 @guest
 <div class="container">
