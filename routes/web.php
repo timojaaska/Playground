@@ -9,8 +9,9 @@ use App\Http\Controllers\HomeController;
 // Route::middleware(['auth'])->group(function () {  // tällä reitit vaativat sisäänkirjautumisen
     Route::group([], function () { // tällä sisäänkirjautumista ei vaadita
 
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    
+    // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); // tähän playground index
+    Route::get('/', [App\Http\Controllers\PlaygroundController::class, 'index'])->name('home'); // tähän playground index
+
     Route::controller(PlaygroundController::class)->prefix('playgrounds')->group(function () {
         Route::get('/', 'index');
         Route::get('/create', 'create')->middleware('auth'); // ->middleware('auth') eli vaatii sisäänkirjautumisen
