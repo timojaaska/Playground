@@ -88,7 +88,6 @@
                 <thead>
                     <tr>
                         <th scope="col">Nimi</th>
-                        <th  style="width: 100px;"></th>
                         <th>Arvosana</th>
                     </tr>
                 </thead>
