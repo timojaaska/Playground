@@ -111,6 +111,8 @@
                 @endforeach
                 </tbody>
             </table>
+            {{-- pagination linkit --}}
+            {{-- {{ $users->onEachSide(5)->links() }} --}}
         </div>
     </div>
 </div>

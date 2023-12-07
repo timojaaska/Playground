@@ -31,6 +31,12 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $user = User::create([
+            'email' => 'test@account.com',
+            'name' => 'TestiKäyttäjä',
+             'password' => bcrypt('simosiili'),
+          ]);
+/*
+        $user = User::create([
             'email' => 'admin@jaaska.fi',
             'name' => 'admin',
             'password' => bcrypt('karigrandi'),
@@ -300,6 +306,7 @@ class DatabaseSeeder extends Seeder
             'rating' => '4',
             'comment' => 'Leikkipuisto on erinomainen paikka lapsille oppia uusia taitoja. Siellä on paljon erilaisia leikkivälineitä, jotka kehittävät lasten motorisia taitoja ja luovuutta.',
         ]);
+*/        
 
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\PlaygroundController;
 use App\Http\Controllers\RatingController; // otetaan RatingController käyttöön
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\HomeController;
+use App\Models\User; // paginointia varten
 
 // Route::middleware(['auth'])->group(function () {  // tällä reitit vaativat sisäänkirjautumisen
     Route::group([], function () { // tällä sisäänkirjautumista ei vaadita
@@ -28,6 +29,10 @@ use App\Http\Controllers\HomeController;
     Route::get('/playgrounds/create', [EquipmentController::class, 'show'])->middleware('auth'); // reititys laitteiden näyttämistä leikkikentän luonti formin yhteydessä
 
     Route::get('/admin', [HomeController::class, 'login']);
+
+    Route::get('/users', function () { // pagination reitti
+        return User::paginate();
+    });
 
 });
 

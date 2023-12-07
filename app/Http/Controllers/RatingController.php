@@ -11,7 +11,7 @@ class RatingController extends Controller
     {
         $request->validate([ // tarkistaa vastaako annettu arviointi vaatimuksia
             'rating' => 'required|integer|min:1|max:5', // arvosana pakollinen väliltä 1-5
-            'comment' => 'nullable|string', // mahdollinen kommentti, tämän arvo saa olla myös null koska käyttäjää ei velvoiteta viestiä kirjoittamaan
+            'comment' => 'nullable|string|max:800' // mahdollinen kommentti, tämän arvo saa olla myös null koska käyttäjää ei velvoiteta viestiä kirjoittamaan
         ]);
 
         Rating::create([ // tässä tallennetaan arviointi tietokantaan

@@ -6,6 +6,10 @@ use App\Models\Playground;
 use App\Models\Equipment;
 use App\Models\PlaygroundEquipment;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
+use Closure;
+
 
 class PlaygroundController extends Controller
 {
@@ -40,23 +44,43 @@ class PlaygroundController extends Controller
 
     public function store(Request $request)
     {
-        //     // dump($request->post()); //                           DUMP
+        // dd($request->post()); //                           DUMP
+
+        $request->validate([
+            'name' => 'required|unique:playgrounds|max:200',
+            'location' => 'required|max:200',
+            'src' => 'nullable|starts_with:https://www.google.com/maps/embed?|ends_with:sfi',
+
+            'selected_equipments.*' => Rule::forEach(function ($value, $attribute) {
+                return [
+                    function (string $attribute, mixed $value, Closure $fail) {
+                        if(isset($value['checked'])) {
+                            $subValidator = Validator::make($value, [
+                                'amount' => 'integer|min:1',
+                            ]);
+                            if ($subValidator->fails()) {
+                                return $fail($subValidator->errors()->first());
+                            }
+                        }
+                    },
+                ];
+            }),
+        ]);
+
         $playground=Playground::create([ // luodaan uusi leikkikenttä annetuilla tiedoilla
         'name' => $request->name,
         'location' => $request->location,
         'src' => $request->src,
         ]);
     
-        $playground->save(); // tallennetaan uuden leikkikentän tiedot tietokantaan
-    
-        foreach ($request->input('selected_equipments', []) as $equipmentId) { // käytetään looppia luomaan jokaiselle valitulle laitteelle oma rivi tauluun
-            $playgroundEquipment = PlaygroundEquipment::create([
-                'playground_id' => $playground->id,
-                'equipment_id' => $equipmentId,
-                'amount' => $request->input('amount_' . $equipmentId, 0), // amount_{$equipmentId} on kentän nimi tyyliin amount_1, amount_2 jne | käytetään oletus arvoa 0 jos käyttäjä ei täytäkään kenttää toki tämänhän vois tehdä suoraan tietokantaankin
-            ]);
-    
-            $playgroundEquipment->save();   // tallennetaan leikkikentän laite tiedot playground_equipment tauluun
+        foreach ($request->input('selected_equipments', []) as $equipment) {
+            if(isset($equipment['checked'])) { 
+                $playgroundEquipment = PlaygroundEquipment::create([
+                    'playground_id' => $playground->id,
+                    'equipment_id' => $equipment['equipment_id'],
+                    'amount' => $equipment['amount'],
+                ]);
+            }       
         }
         return redirect('/playgrounds')->with('added', 'Leikkikenttä lisätty');
     }
@@ -134,6 +158,12 @@ class PlaygroundController extends Controller
     public function update(Request $request, $id)
     {
         $playground = Playground::find($id);
+
+        $request->validate([ 
+            'name' => 'required|max:200',
+            'location' => 'required|max:200',
+            'src' => 'starts_with:https://www.google.com/maps/embed?|ends_with:sfi',
+        ]);
 
         $playground->update([
             'name' => $request->input('name'),

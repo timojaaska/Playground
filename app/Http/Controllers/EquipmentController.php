@@ -9,7 +9,9 @@ class EquipmentController extends Controller
 {
     public function store(Request $request)
     {
-        
+        $request->validate([
+            'name' => 'required|unique:equipments|max:200',
+        ]);
         Equipment::create([
 
             'name' => $request->name,

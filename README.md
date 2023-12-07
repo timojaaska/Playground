@@ -65,3 +65,10 @@ php artisan serve
 ```
 ### Modelin riippuvuuksien lataaminen(with)
 https://laravel.com/docs/10.x/eloquent-relationships#eager-loading
+
+### PHP 8.1 version käyttö
+/opt/cpanel/ea-php81/root/usr/bin/php /opt/cpanel/composer/bin/composer install
+[ummapclx@hotelli04 laravel]$ /opt/cpanel/ea-php81/root/usr/bin/php /opt/cpanel/composer/bin/composer install
+
+/opt/cpanel/ea-php81/root/usr/bin/php artisan migrate
+/opt/cpanel/ea-php81/root/usr/bin/php artisan db:seed

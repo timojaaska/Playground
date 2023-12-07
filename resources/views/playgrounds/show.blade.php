@@ -72,12 +72,27 @@
                     @csrf
                     <input type="hidden" name="playgroundId" value="{{$item->id}}">
                     Montako tähteä annat 1-5:
-                    <input type="number" name="rating" min="1" max="5" required> {{-- tää vois olla lopullisessa versiossa sitte jotain muuta kuin numeroita esim käyttäjä antaisi 5 lapiota tai jotain vastaavaa lelua arvosanaksi --}}
+                    {{--<input type="number" name="rating" min="1" max="5" required> {{-- tää vois olla lopullisessa versiossa sitte jotain muuta kuin numeroita esim käyttäjä antaisi 5 lapiota tai jotain vastaavaa lelua arvosanaksi --}}
+                    <input type="number" name="rating" min="1" max="5" value="{{ old('rating') }}"> {{-- tää vois olla lopullisessa versiossa sitte jotain muuta kuin numeroita esim käyttäjä antaisi 5 lapiota tai jotain vastaavaa lelua arvosanaksi --}}
                     <br> {{-- täälä oli sitte näitä rivinvaihtoja --}}
                     Voit halutessasi jättää kommentin:
-                    <input type="text" name="comment"> {{-- vois miettiä pitäskö olla textarea --}}
+                    {{--<input type="text" name="comment" maxlength="800"> {{-- vois miettiä pitäskö olla textarea --}}
+                    <input type="text" name="comment" value="{{ old('comment') }}"> {{-- vois miettiä pitäskö olla textarea --}}
+
                     <br>
                     <button type="submit" class="btn btn-success">Anna arvio</button>
+                    
+                    {{-- validointi error messagen näyttö --}}
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                 </div>
             @endif
         </form>
