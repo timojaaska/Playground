@@ -16,12 +16,18 @@
 
             <div class="col-auto">
                 <label for="location">Sijainti:</label>
-                <input type="text" name="location" value="{{ old('location') }}">
+                <input class="form-control @error('location') is-invalid @enderror" type="text" name="location" value="{{ old('location') }}">
+                <div class="invalid-feedback">
+                    {{ $errors->first('location')}}
+                </div>
             </div>
 
             <div class="col-auto">
                 <label for="location">SRC:</label>
-                <input type="text" name="src" value="{{ old('src') }}">
+                <input class="form-control @error('src') is-invalid @enderror" type="text" name="src" value="{{ old('src') }}">
+                <div class="invalid-feedback">
+                    {{ $errors->first('src')}}
+                </div>
             </div>
 
             <label for="selected_equipments">Valitse laitteet:</label>
@@ -34,7 +40,10 @@
                     <input name="selected_equipments[{{ $idx }}][checked]" type="checkbox" value="true" class="btn-check rounded" id="{{ $idx }}">
                     <label class="btn btn-outline-primary rounded" for="{{ $idx }}">{{ $equipment->name }}</label>
                     <div class="col-3"> {{-- lyhentää kentän pituutta, oikea termi olisi varmaankin leveyttä --}}
-                        <input type="number" name="selected_equipments[{{ $idx }}][amount]" value="0" class="form-control">
+                        <input type="number" name="selected_equipments[{{ $idx }}][amount]" value="0" class="form-control @error('selected_equipments.'.$idx.'.amount') is-invalid @enderror">
+                        <div class="invalid-feedback">
+                        {{ $errors->first('selected_equipments.'.$idx.'.amount')}}
+                        </div>
                     </div>    
                     <span class="input-group-text">kpl</span>
                 </div>
@@ -42,7 +51,7 @@
             @endforeach
 
             <button type="submit" class="btn btn-success">Tallenna</button>
-
+            {{-- @dump($errors->all()) --}}
             {{-- validointi error messagen näyttö --}}
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -66,7 +75,10 @@
             <form method="POST" action="/equipments"> 
                 @csrf
                 <label for="name" class="form-label">Nimi:</label>
-                <input type="text" class="form-control" name="name" required>
+                <input class="form-control @error('name') is-invalid @enderror" type="text" name="name">
+                <div class="invalid-feedback">
+                    {{ $errors->first('name')}}
+                </div> 
         </div>        
         <div class="mb-3">
                 <button type="submit" class="btn btn-success">Tallenna</button>

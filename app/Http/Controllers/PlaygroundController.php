@@ -67,7 +67,7 @@ class PlaygroundController extends Controller
             }),
         ]);
 
-        $playground=Playground::create([ // luodaan uusi leikkikenttä annetuilla tiedoilla
+        $playground=Playground::create([
         'name' => $request->name,
         'location' => $request->location,
         'src' => $request->src,

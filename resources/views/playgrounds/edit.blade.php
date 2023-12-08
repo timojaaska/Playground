@@ -11,17 +11,26 @@
 
                 <div class="mb-3">
                     <label for="name" class="form-label">Nimi:</label>
-                    <input type="text" class="form-control" name="name" value="{{$playground->name}}">
+                    <input class="form-control @error('name') is-invalid @enderror" type="text" name="name" value="{{$playground->name}}">
+                    <div class="invalid-feedback">
+                        {{ $errors->first('name')}}
+                    </div> 
                 </div>
 
                 <div class="mb-3">
                     <label for="location" class="form-label">Sijainti:</label>
-                    <input type="text" class="form-control" name="location" value="{{$playground->location}}">
+                    <input class="form-control @error('location') is-invalid @enderror" type="text" name="location" value="{{$playground->location}}">
+                    <div class="invalid-feedback">
+                        {{ $errors->first('location')}}
+                    </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="src" class="form-label">SRC:</label>
-                    <input type="text" class="form-control" name="src" value="{{$playground->src}}">
+                    <input class="form-control @error('src') is-invalid @enderror" type="text" name="src" value="{{$playground->src}}">
+                    <div class="invalid-feedback">
+                        {{ $errors->first('src')}}
+                    </div>
                 </div>
 
                 <div class="mb-3">

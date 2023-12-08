@@ -57,7 +57,7 @@
                     @endif
                 </li>
                 @else {{-- jos ei ole arvosteluja niin ilmoitetaan se käyttäjälle --}}
-                    <li>Ei vielä yhtään arviota.</li>
+                        <li>Ei vielä yhtään arviota.</li>
                 @endif
                 </li>
             </ul>
@@ -73,26 +73,19 @@
                     <input type="hidden" name="playgroundId" value="{{$item->id}}">
                     Montako tähteä annat 1-5:
                     {{--<input type="number" name="rating" min="1" max="5" required> {{-- tää vois olla lopullisessa versiossa sitte jotain muuta kuin numeroita esim käyttäjä antaisi 5 lapiota tai jotain vastaavaa lelua arvosanaksi --}}
-                    <input type="number" name="rating" min="1" max="5" value="{{ old('rating') }}"> {{-- tää vois olla lopullisessa versiossa sitte jotain muuta kuin numeroita esim käyttäjä antaisi 5 lapiota tai jotain vastaavaa lelua arvosanaksi --}}
-                    <br> {{-- täälä oli sitte näitä rivinvaihtoja --}}
+                    <div class="col-1">
+                        <input class="form-control @error('rating') is-invalid @enderror "type="number" name="rating" min="1" max="5" value="{{ old('rating') }}"> {{-- tää vois olla lopullisessa versiossa sitte jotain muuta kuin numeroita esim käyttäjä antaisi 5 lapiota tai jotain vastaavaa lelua arvosanaksi --}}  
+                        <div class="invalid-feedback">
+                            {{ $errors->first('rating')}}
+                        </div>
+                    </div>
                     Voit halutessasi jättää kommentin:
                     {{--<input type="text" name="comment" maxlength="800"> {{-- vois miettiä pitäskö olla textarea --}}
-                    <input type="text" name="comment" value="{{ old('comment') }}"> {{-- vois miettiä pitäskö olla textarea --}}
-
-                    <br>
+                    <input class="form-control @error('comment') is-invalid @enderror" type="text" name="comment" value="{{ old('comment') }}"> {{-- vois miettiä pitäskö olla textarea --}}
+                    <div class="invalid-feedback">
+                        {{ $errors->first('comment')}}
+                    </div>
                     <button type="submit" class="btn btn-success">Anna arvio</button>
-                    
-                    {{-- validointi error messagen näyttö --}}
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
                 </div>
             @endif
         </form>
