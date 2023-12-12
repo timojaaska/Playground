@@ -9,13 +9,11 @@
                 <h3>Leikkikentät</h3>
                 <div class="ms-auto"><a class="btn btn-primary btn-sm" href="/playgrounds/create">Luo uusi</a></div>                
             </div>
-
             @if (session('added'))
                 <div class="alert alert-success">
                     {{ session('added') }}
                 </div>
             @endif
-
             <table class="table">
                 <thead>
                     <tr>
@@ -84,6 +82,11 @@
             <div class="d-flex">
                 <h3>Leikkikentät</h3>              
             </div>
+            @if (session('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
             <table class="table">
                 <thead>
                     <tr>

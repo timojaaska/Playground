@@ -75,10 +75,16 @@
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
             @yield('content')
         </main>
+        <footer class="footer mt-auto py-3">
+            <div class="container text-center">
+                <p>
+                    <a href="/feedback">Anna palautetta</a>
+                </p>
+            </div>
+        </footer>
     </div>
 </body>
 </html>
