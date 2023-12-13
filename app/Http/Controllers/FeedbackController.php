@@ -18,6 +18,7 @@ class FeedbackController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'email:rfc,dns',
+            'title' => 'required',
             'feedback' => 'required|max:2500'
         ]);
 
@@ -30,13 +31,16 @@ class FeedbackController extends Controller
         $feedbackData = [
             'name' => $request->input('name'),
             'email' => $request->input('email'),
+            'title' => $request->input('title'),
             'feedback' => $request->input('feedback'),
             // 'name' => $request->name,
             // 'email' => $request->email,
             // 'feedback' => $request->feedback,
         ];
 
-        Mail::to('palaute@leikkikentatsievi.fi')->send(new FeedbackMail($feedbackData));
+        Mail::to('palaute@leikkikentatsievi.fi')
+        ->from($request->input('email'), $request->input('name'))
+        ->send(new FeedbackMail($feedbackData));
 
         return redirect('/playgrounds')->with('message', 'Kiitos palautteestasi');
     }
