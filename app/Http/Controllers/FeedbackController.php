@@ -38,9 +38,7 @@ class FeedbackController extends Controller
             // 'feedback' => $request->feedback,
         ];
 
-        Mail::to('palaute@leikkikentatsievi.fi')
-        ->from($request->input('email'), $request->input('name'))
-        ->send(new FeedbackMail($feedbackData));
+        Mail::to('palaute@leikkikentatsievi.fi')->send(new FeedbackMail($feedbackData));
 
         return redirect('/playgrounds')->with('message', 'Kiitos palautteestasi');
     }
