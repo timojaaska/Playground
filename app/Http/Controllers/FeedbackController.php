@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Models\FeedbackMail;
+use App\Models\FeedbackMailThanks;
 
 class FeedbackController extends Controller
 {
@@ -22,23 +23,16 @@ class FeedbackController extends Controller
             'feedback' => 'required|max:2500'
         ]);
 
-        // Mail::to('palaute@leikkikentatsievi.fi')
-        // ->cc($request->email)
-        // ->subject('Palauteviesti')
-        // ->text($request->feedback)
-        // ->from($request->email)
-        // ->send();
         $feedbackData = [
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'title' => $request->input('title'),
             'feedback' => $request->input('feedback'),
-            // 'name' => $request->name,
-            // 'email' => $request->email,
-            // 'feedback' => $request->feedback,
         ];
 
         Mail::to('palaute@leikkikentatsievi.fi')->send(new FeedbackMail($feedbackData));
+
+        Mail::to($request->input('email'))->send(new FeedbackMailThanks($feedbackData));
 
         return redirect('/playgrounds')->with('message', 'Kiitos palautteestasi');
     }

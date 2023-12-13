@@ -1,9 +1,6 @@
 @extends('layouts.app')
 @section('content')
 <div>
-    {{-- https://laravel.com/docs/10.x/mail#main-content --}}
-    {{-- https://laravel.com/docs/10.x/mail#queueing-mail --}}
-    {{-- https://laravel.com/docs/10.x/validation#rule-email --}}
     <div class="card">
         <div class="card-body">
             <h3>Anna palautteesi täällä</h3>
