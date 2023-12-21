@@ -27,10 +27,12 @@ class EquipmentController extends Controller
         ]);
     }
 
-    public function show()
-    {
-        $equipments = Equipment::all(); // siirretään kaikki tiedot equipments taulusta $equipments muuttujaan myöhempää käyttöä varten
-        return view('playgrounds.form', ['equipments' => $equipments]); // palautetaan form.blade.php näkymä joka sijaitsee playgrounds kansiossa. siirretään näkymään taulukko joka sisältää kaikki tiedot equipments taulusta. siten voidaan käyttää leikkikentän luomisessa laitteiden nimiä ja niiden id tietoja.
-    }
+    // public function show()
+    // {
+    //     $equipments = Equipment::all(); // siirretään kaikki tiedot equipments taulusta $equipments muuttujaan myöhempää käyttöä varten
+    //     // return view('playgrounds.form', ['equipments' => $equipments]); // palautetaan form.blade.php näkymä joka sijaitsee playgrounds kansiossa. siirretään näkymään taulukko joka sisältää kaikki tiedot equipments taulusta. siten voidaan käyttää leikkikentän luomisessa laitteiden nimiä ja niiden id tietoja.
+    //     return view('playgrounds.create', ['equipments' => $equipments]); // palautetaan form.blade.php näkymä joka sijaitsee playgrounds kansiossa. siirretään näkymään taulukko joka sisältää kaikki tiedot equipments taulusta. siten voidaan käyttää leikkikentän luomisessa laitteiden nimiä ja niiden id tietoja.
+
+    // }
 
 }

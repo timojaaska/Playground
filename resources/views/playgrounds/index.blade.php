@@ -28,10 +28,8 @@
                         <td>
                             <div class="btn-group btn-group-sm" role="group">
                             
-                                <form action="/playgrounds/{{$item->id}}" method="POST">
-                                    @csrf
+                                <form action="/playgrounds/{{$item->id}}/edit" method="GET">
                                     {{-- @method('EDIT') --}}
-                                    {{-- tämä jostain syystä menee edit sivulle kun otti @method('EDIT') pois --}}
                                     <button type="submit" class="btn btn-primary">Muokkaa</button>
                                 </form>
 

@@ -16,18 +16,25 @@ use App\Models\User; // paginointia varten
 
     Route::controller(PlaygroundController::class)->prefix('playgrounds')->group(function () {
         Route::get('/', 'index');
-        Route::get('/create', 'create')->middleware('auth'); // ->middleware('auth') eli vaatii sisäänkirjautumisen
+        Route::get('/create', 'showForm')->middleware('auth')->name('playground.createForm'); // ->middleware('auth') eli vaatii sisäänkirjautumisen
         Route::get('/{id}', 'show');
-        Route::post('/', 'store')->middleware('auth');
-        Route::post('/{id}', 'edit')->middleware('auth');
-        Route::put('/{id}', 'update')->middleware('auth'); // PUT metodille oma reititys
+        Route::get('/{id}/edit', 'showForm')->name('playground.editForm');
+        Route::post('/', 'store')->middleware('auth')->name('playground.store');
+        // Route::post('/{id}', 'edit')->middleware('auth');
+        // Route::post('/{id}', 'edit')->middleware('auth');
+        Route::put('/{id}/update', 'update')->middleware('auth')->name('playground.update'); // PUT metodille oma reititys
+        // Route::put('/playgrounds/{id}', 'update')->middleware('auth'); // PUT metodille oma reititys 
         Route::delete('/{id}', 'destroy')->middleware('auth'); // https://laravel.com/docs/10.x/routing#form-method-spoofing
-    });                         // destroy :ta käytetään deleten sijaan
+    });  
+                           // destroy :ta käytetään deleten sijaan
+    // Route::put('/{id}/update', '\App\Http\Controllers\PlaygroundController@update');                       
+    // Route::put('/update/{id}', '\App\Http\Controllers\PlaygroundController@update')->middleware('auth'); // tällä korjaantu reititys ongelma
+    // Route::post('/playgrounds/{id}', '\App\Http\Controllers\PlaygroundController@edit')->middleware('auth'); // tällä korjaantu reititys ongelma
 
     Route::post('/rating', '\App\Http\Controllers\RatingController@store'); // vaati tarkan osoitteen toimiakseen, reititys arviointijen tallentamista varten
 
     Route::post('/equipments', '\App\Http\Controllers\EquipmentController@store')->middleware('auth'); // laitteiden lisäystä varten reititys, vaati tarkan osoitteen toimiakseen
-    Route::get('/playgrounds/create', [EquipmentController::class, 'show'])->middleware('auth'); // reititys laitteiden näyttämistä leikkikentän luonti formin yhteydessä
+    // Route::get('/playgrounds/create', [EquipmentController::class, 'show'])->middleware('auth'); // reititys laitteiden näyttämistä leikkikentän luonti formin yhteydessä
 
     Route::get('/admin', [HomeController::class, 'login']);
 
