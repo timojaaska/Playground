@@ -1,0 +1,26 @@
+{
+  "extends": [
+      "eslint:recommended",
+      "plugin:vue/vue3-recommended"
+  ],
+  "parserOptions": {
+      "ecmaVersion": 9,
+      "sourceType": "module"
+  },
+  "rules": {
+      "no-console": 0,
+      "no-case-declarations": 0,
+      "indent": ["error", 2, {"SwitchCase": 1}],
+      "vue/attributes-order": 0,
+      "vue/singleline-html-element-content-newline": 0,
+      "vue/max-attributes-per-line": [2, {
+          "singleline": 4,
+          "multiline": 1
+      }],
+      "vue/multi-word-component-names": false
+  },
+  "globals": {
+      "Vue": true,
+      "require": true
+  }
+}
