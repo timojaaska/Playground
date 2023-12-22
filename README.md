@@ -1,5 +1,24 @@
-## laravel komentoja
+## Projektin käyttöohjeet
+
 avaa laracon ikkunasta terminal jotta 'php artisan' komento toimii
+
+### Projektin käynnistys kehitystä varten
+Laravel
+```
+php artisan serve
+```
+Vue
+```
+# devaus
+npm run dev
+```
+
+### Projektin julkaisu tuotantoon
+
+Luo Vue tuotantopaketti
+```
+npm run build
+```
 
 ### Eloquent
 https://laravel.com/docs/10.x/eloquent#generating-model-classes
@@ -58,11 +77,9 @@ php artisan ui bootstrap --auth
 https://getbootstrap.com/docs/5.3/getting-started/introduction/
 
 ### Boostrap ikonit
-https://icons.getbootstrap.com/ 
+https://icons.getbootstrap.com/
 
-```
-php artisan serve
-```
+
 ### Modelin riippuvuuksien lataaminen(with)
 https://laravel.com/docs/10.x/eloquent-relationships#eager-loading
 
