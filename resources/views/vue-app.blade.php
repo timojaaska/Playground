@@ -12,9 +12,6 @@
         <link rel="dns-prefetch" href="//fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-        <!-- Fonts -->
-        <link href="{{ mix('/css/app.css') }}" rel="stylesheet" type="text/css">
-
         <!-- Scripts -->
         @vite(['resources/sass/vue-app.scss', 'resources/js/vue-app.js'])
 

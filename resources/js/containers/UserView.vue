@@ -8,14 +8,14 @@
           </router-link>
         </li>
         <li class="breadcrumb-item active" aria-current="page">
-          {{ $route.params.id ? $route.params.id : $t('users.create_user') }}
+          {{ $route.params.id ? $route.params.id : $t('messages.create_user') }}
         </li>
       </ol>
     </nav>
 
     <div class="card" v-if="$route.params.id">
       <div class="card-body">
-        <h5>{{ $t('users.change_password') }}</h5>
+        <h5>{{ $t('messages.change_password') }}</h5>
         <form
           name="pw-form"
           id="pw-form"
@@ -24,7 +24,7 @@
           autocomplete="off"
         >
           <div class="form-group pb-1">
-            <label for="id-pw1">{{ $t('users.password') }} (*)</label>
+            <label for="id-pw1">{{ $t('messages.password') }} (*)</label>
             <input
               id="id-pw1"
               type="password"
@@ -40,7 +40,7 @@
           </div>
 
           <div class="form-group pb-1">
-            <label for="id-pw2">{{ $t('users.password_again') }} (*)</label>
+            <label for="id-pw2">{{ $t('messages.password_again') }} (*)</label>
             <input
               id="id-pw2"
               type="password"
@@ -55,11 +55,11 @@
             </div>
           </div>
           <div v-show="passwordChanged" class="alert alert-success mt-2 mb-1" role="alert">
-            {{ $t('users.password_change_succeeded') }}
+            {{ $t('messages.password_change_succeeded') }}
           </div>
           <div class="d-flex pt-2">
             <button type="submit" :disabled="loading" class="btn btn-primary ms-auto">
-              {{ $t('users.change_password') }}
+              {{ $t('messages.change_password') }}
             </button>
           </div>
         </form>
@@ -67,7 +67,7 @@
     </div>
     <div class="card mt-3">
       <div class="card-body">
-        <h5>{{ $route.params.id ? $t('users.edit_user') : $t('users.create_user') }}</h5>
+        <h5>{{ $route.params.id ? $t('messages.edit_user') : $t('messages.create_user') }}</h5>
         <form
           name="user-form"
           id="user-form"
@@ -80,7 +80,7 @@
             id="id-em"
             name="name-em"
             type="text"
-            :label="$t('users.email_address')"
+            :label="$t('messages.email_address')"
             :required="true"
             :errors="errors.email"
             v-model.trim="email"
@@ -91,20 +91,20 @@
             id="id-name"
             name="name-name"
             type="text"
-            :label="$t('users.name')"
+            :label="$t('messages.name')"
             :required="true"
             :errors="errors.name"
             v-model.trim="name"
           />
 
           <div class="form-group pb-1">
-            <label for="id-rolee">{{ $t('users.role') }} (*)</label>
+            <label for="id-rolee">{{ $t('messages.role') }} (*)</label>
             <select class="form-select" id="id-role" v-model="role">
               <option value="admin">
-                {{ $t('users.roles.admin') }}
+                {{ $t('messages.roles.admin') }}
               </option>
               <option value="user">
-                {{ $t('users.roles.user') }}
+                {{ $t('messages.roles.user') }}
               </option>
             </select>
           </div>
@@ -115,7 +115,7 @@
             id="id-pwd1"
             name="name-password"
             type="password"
-            :label="$t('users.password')"
+            :label="$t('messages.password')"
             :required="true"
             :errors="errors.password"
             v-model.trim="password"
@@ -128,7 +128,7 @@
             name="name-password2"
             type="password"
             autocomplete="new-password"
-            :label="$t('users.password_again')"
+            :label="$t('messages.password_again')"
             :required="true"
             :errors="errors.verifyPw"
             v-model.trim="repeatPassword"

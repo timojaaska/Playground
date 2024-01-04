@@ -15,7 +15,7 @@
         Print
       </button>
     </div>
-
+  
     <div class="card">
       <div class="card-body">
         <div class="table-responsive">
@@ -52,32 +52,32 @@
     </div>
   </div>
 </template>
-
-
+  
+  
 <script setup>
 import { ref, computed } from 'vue'
-import userapi from '../api/user.js'
+// import userapi from '../api/user.js'
 import { useStore } from "vuex";
 import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router'
-
+  
 const store = useStore()
 const route = useRoute()
 const router = useRouter()
-
+  
 const users = ref([])
 const loading = ref(false)
-
+  
 fetchUsers();
-
+  
 onBeforeRouteUpdate((to, from) => {
   // if needed
 })
-
+  
 async function fetchUsers() {
   try {
     loading.value = true
-    const usrs = await userapi.fetchUsers()
-    users.value = usrs
+    // const usrs = await userapi.fetchUsers()
+    // users.value = usrs
   } catch(err) {
     console.error(err)
     store.dispatch('createErrorToast', err)
@@ -94,6 +94,6 @@ function onExportClick() {
 function onPrintClick() {
   store.dispatch('createErrorToast', { header: 'print', body: 'not implemented'})
 }
-
-
+  
+  
 </script>
