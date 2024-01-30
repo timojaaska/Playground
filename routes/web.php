@@ -26,8 +26,8 @@ Route::group([], function () { // tällä sisäänkirjautumista ei vaadita
         Route::put('/{id}/update', 'update')->middleware('auth')->name('playground.update'); // PUT metodille oma reititys
         // Route::put('/playgrounds/{id}', 'update')->middleware('auth'); // PUT metodille oma reititys
         Route::delete('/{id}', 'destroy')->middleware('auth'); // https://laravel.com/docs/10.x/routing#form-method-spoofing
+        // Route::get('/vue-playgrounds', 'getPlaygrounds'); // 
     });
-                           // destroy :ta käytetään deleten sijaan
     // Route::put('/{id}/update', '\App\Http\Controllers\PlaygroundController@update');
     // Route::put('/update/{id}', '\App\Http\Controllers\PlaygroundController@update')->middleware('auth'); // tällä korjaantu reititys ongelma
     // Route::post('/playgrounds/{id}', '\App\Http\Controllers\PlaygroundController@edit')->middleware('auth'); // tällä korjaantu reititys ongelma

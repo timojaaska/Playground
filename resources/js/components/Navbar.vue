@@ -7,11 +7,11 @@
     >
       <span class="navbar-toggler-icon" />
     </button>
-    <a class="navbar-brand me-0" href="#">Codetag</a>
+    <a class="navbar-brand me-0" href="#">Home</a>
     <!--<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">-->
     <ul class="navbar-nav px-3 ms-auto">
       <li class="nav-item text-nowrap">
-        <a class="nav-link" @click="logout">{{ $t('common.sign_out') }}</a>
+        <a class="nav-link" @click="logout">{{ $t('messages.sign_out') }}</a>
       </li>
     </ul>
   </nav>

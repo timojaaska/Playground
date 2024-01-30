@@ -136,10 +136,10 @@
 
           <div class="d-flex pt-2">
             <router-link to="/users" class="btn btn-light ms-auto">
-              {{ $t('common.cancel') }}
+              {{ $t('messages.cancel') }}
             </router-link>
             <button type="submit" :disabled="loading" class="btn btn-primary ms-2">
-              {{ $t('common.save') }}
+              {{ $t('messages.save') }}
             </button>
           </div>
         </form>

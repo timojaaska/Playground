@@ -4,7 +4,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item active" aria-current="page">
-            {{ $t('users.users') }}
+            {{ $t('playgrounds.playgrounds') }}
           </li>
         </ol>
       </nav>
@@ -24,24 +24,28 @@
               <tr>
                 <th>Id</th>
                 <th>Nimi</th>
-                <th>Sähköposti</th>
-                <!-- <th>Rooli</th> -->
-                <th class="text-nowrap">
-                  <router-link to="/users/create" class="btn btn-sm btn-primary">
-                    Lisää käyttäjä
+                <th>Sijainti</th>
+                <!-- <th class="text-nowrap">
+                  <router-link to="/playgrounds/create" class="btn btn-sm btn-primary">
+                    Lisää leikkikenttä
                   </router-link>
-                </th>
+                </th> -->
               </tr>
             </thead>
             <tbody>
-              <tr v-for="user in users" :key="user.id">
-                <td>{{ user.id }}</td>
-                <td>{{ user.name }}</td>
-                <td>{{ user.email }}</td>
-                <!-- <td>{{ $t('users.roles.' + user.role) }}</td> -->
+              <tr v-for="playground in playgrounds" :key="playground.id">
+                <td>{{ playground.id }}</td>
+                <td>{{ playground.name }}</td>
+                <td>{{ playground.location }}</td>
                 <td style="width:20px" class="py-1">
-                  <button type="button" @click="editUser(user.id)" class="btn btn-sm btn-primary">
+                  <button type="button" @click="editPlayground(playground.id)" class="btn btn-sm btn-primary">
                     Muokkaa
+                  </button>
+                </td>
+                <td style="width:20px" class="py-1"> 
+                  <!-- deletePlayground(playground.id)  -->
+                  <button type="button" @click="openConfirmModal(playground.id)" class="btn btn-sm btn-danger">
+                    Poista
                   </button>
                 </td>
               </tr>
@@ -50,34 +54,58 @@
         </div>
       </div>
     </div>
+    <confirm-modal
+      :show="confirmModalVisible"
+      title="Vahvista poisto"
+      message="Oletko varma, että haluat poistaa {{playground.name}} leikkikentän?"
+      accept-button-label="Kyllä"
+      cancel-button-label="Peruuta"
+      @close="onConfirmClose"
+    />
   </div>
 </template>
   
   
 <script setup>
 import { ref, computed } from 'vue'
-// import userapi from '../api/user.js'
+import playgroundapi from '../../api/playground.js'
 import { useStore } from "vuex";
 import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router'
+import ConfirmModal from '../../components/common/ConfirmModal.vue';
   
 const store = useStore()
 const route = useRoute()
 const router = useRouter()
   
-const users = ref([])
+const playgrounds = ref([])
 const loading = ref(false)
-  
-fetchUsers();
+
+
+const confirmModalVisible = ref(false);
+
+function openConfirmModal() {
+  confirmModalVisible.value = true;
+}
+
+function onConfirmClose(status) {
+  console.log('onConfirmClose', status);
+  if (status){
+    deletePlayground()
+  }
+  confirmModalVisible.value = false;
+}
+
+fetchPlaygrounds();
   
 onBeforeRouteUpdate((to, from) => {
   // if needed
 })
   
-async function fetchUsers() {
+async function fetchPlaygrounds() {
   try {
     loading.value = true
-    // const usrs = await userapi.fetchUsers()
-    // users.value = usrs
+    const pg = await playgroundapi.fetchPlaygrounds()
+    playgrounds.value = pg
   } catch(err) {
     console.error(err)
     store.dispatch('createErrorToast', err)
@@ -85,15 +113,20 @@ async function fetchUsers() {
     loading.value = false
   }
 }
-function editUser(userId){
-  router.push({ path:'/users/'+userId});
+
+function deletePlayground(playgroundId) {
+  router.push({ path: '/vue-playgrounds/delete/' + playgroundId });
 }
+
+function editPlayground(playgroundId) {
+  router.push({ path: '/vue-playgrounds/' + playgroundId });
+}
+
 function onExportClick() {
   store.dispatch('createErrorToast', { header: 'export pdf', body: 'not implemented'})
 }
 function onPrintClick() {
   store.dispatch('createErrorToast', { header: 'print', body: 'not implemented'})
 }
-  
-  
+
 </script>

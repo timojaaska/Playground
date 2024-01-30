@@ -17,7 +17,8 @@
           "singleline": 4,
           "multiline": 1
       }],
-      "vue/multi-word-component-names": 0
+      "vue/multi-word-component-names": 0,
+      "vue/require-v-for-key":0
   },
   "globals": {
       "Vue": true,

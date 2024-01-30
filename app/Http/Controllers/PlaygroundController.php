@@ -308,13 +308,46 @@ class PlaygroundController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id) // hoxs destroy
+    public function destroy($id)
     {
     // dump($id);
     $playground = Playground::find($id);
     $playground->delete();
 
     return redirect('/playgrounds');
+    }
+
+    public function getPlaygrounds()
+    {
+        return Playground::all();
+    }
+
+    public function fetchPlayground($playgroundId)
+    {
+        // return Playground::find($playgroundId);
+        return Playground::with('equipments')->find($playgroundId);
+    }
+
+    public function updatePlayground($id, Request $request)
+    {
+        $request->validate([
+            'name' => 'required|max:200',
+            'location' => 'required|max:200',
+            'src' => 'nullable|starts_with:https://www.google.com/maps/embed?|ends_with:sfi',
+        ]);
+
+        $playground = Playground::find($id);
+
+        $playground->update($request->all());
+
+    }
+
+    public function destroyPlayground($playgroundId)
+    {
+    $playground = Playground::find($id);
+    $playground->delete();
+
+    return redirect('/destroy/playgrounds');
     }
 
 }

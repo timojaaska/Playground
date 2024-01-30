@@ -17,10 +17,22 @@
     </div>
     <div class="modal-footer">
       <div class="d-flex justify-content-end">
-        <button type="button" v-if="cancelButtonLabel" :disabled="isLoading" class="btn btn-secondary" @click="onClose">
+        <button
+          type="button"
+          v-if="cancelButtonLabel"
+          :disabled="isLoading"
+          class="btn btn-secondary"
+          @click="onClose"
+        >
           {{ cancelButtonLabel }}
         </button>
-        <button type="button" v-if="acceptButtonLabel" :disabled="isLoading" class="btn btn-orange ms-1" @click="onOk">
+        <button
+          type="button"
+          v-if="acceptButtonLabel"
+          :disabled="isLoading"
+          class="btn btn-danger ms-1"
+          @click="onOk"
+        >
           {{ acceptButtonLabel }}
         </button>
       </div>
